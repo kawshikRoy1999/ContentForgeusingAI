@@ -1,0 +1,102 @@
+<!-- ====== SHARED SIDEBAR + TOPBAR LAYOUT ====== -->
+<!-- Include this snippet at the top of every dashboard page -->
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-icon">⚡</div>
+    <span class="logo-text">ContentForge AI</span>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-section-label">Main</div>
+    <a href="dashboard.html" class="nav-item" data-page="dashboard.html">
+      <i class="bi bi-grid-1x2-fill"></i> Dashboard
+    </a>
+    <a href="generate.html" class="nav-item" data-page="generate.html">
+      <i class="bi bi-stars"></i> Generate Content
+      <span class="nav-badge new">AI</span>
+    </a>
+    <a href="library.html" class="nav-item" data-page="library.html">
+      <i class="bi bi-collection-fill"></i> Content Library
+    </a>
+    <a href="templates.html" class="nav-item" data-page="templates.html">
+      <i class="bi bi-layout-text-window-reverse"></i> Templates
+    </a>
+    <a href="calendar.html" class="nav-item" data-page="calendar.html">
+      <i class="bi bi-calendar3"></i> Content Calendar
+    </a>
+
+    <div class="nav-section-label">Publish</div>
+    <a href="linkedin.html" class="nav-item" data-page="linkedin.html">
+      <i class="bi bi-linkedin"></i> LinkedIn Publisher
+    </a>
+
+    <div class="nav-section-label">Workspace</div>
+    <a href="brand-voice.html" class="nav-item" data-page="brand-voice.html">
+      <i class="bi bi-mic-fill"></i> Brand Voice
+    </a>
+    <a href="team.html" class="nav-item" data-page="team.html">
+      <i class="bi bi-people-fill"></i> Team
+    </a>
+    <a href="analytics.html" class="nav-item" data-page="analytics.html">
+      <i class="bi bi-bar-chart-fill"></i> Analytics
+    </a>
+
+    <div class="nav-section-label">Account</div>
+    <a href="billing.html" class="nav-item" data-page="billing.html">
+      <i class="bi bi-credit-card-fill"></i> Billing & Plans
+    </a>
+    <a href="settings.html" class="nav-item" data-page="settings.html">
+      <i class="bi bi-gear-fill"></i> Settings
+    </a>
+  </nav>
+
+  <div class="sidebar-footer">
+    <div class="credit-meter mb-3">
+      <div class="credit-numbers">
+        <span class="credit-used">32,450 <small style="font-weight:400;font-size:11px;color:var(--text-muted)">words used</small></span>
+        <span class="credit-total">50,000</span>
+      </div>
+      <div class="progress-custom">
+        <div class="progress-bar" data-width="65"></div>
+      </div>
+      <div style="font-size:11px;color:var(--text-muted);margin-top:5px;">Starter Plan · Resets Apr 1</div>
+    </div>
+
+    <div class="user-card">
+      <div class="user-avatar">JD</div>
+      <div class="user-info">
+        <div class="user-name">John Doe</div>
+        <div class="user-plan">Starter Plan</div>
+      </div>
+      <i class="bi bi-three-dots-vertical ms-auto" style="color:var(--text-muted);font-size:14px;"></i>
+    </div>
+  </div>
+</aside>
+
+<!-- TOPBAR -->
+<header class="topbar">
+  <button id="hamburgerBtn" class="icon-btn d-lg-none" style="border:none;background:transparent;">
+    <i class="bi bi-list" style="font-size:20px;"></i>
+  </button>
+
+  <span class="topbar-title" id="pageTitle">Dashboard</span>
+
+  <div class="topbar-search d-none d-md-flex">
+    <i class="bi bi-search" style="color:var(--text-muted);font-size:13px;"></i>
+    <input type="text" placeholder="Search content, templates...">
+  </div>
+
+  <div class="topbar-actions">
+    <a href="generate.html" class="btn-primary-custom" style="padding:8px 16px;font-size:13px;">
+      <i class="bi bi-plus-lg"></i> New
+    </a>
+    <div class="icon-btn">
+      <i class="bi bi-bell-fill"></i>
+      <span class="notif-dot"></span>
+    </div>
+    <div class="icon-btn">
+      <i class="bi bi-question-circle-fill"></i>
+    </div>
+  </div>
+</header>

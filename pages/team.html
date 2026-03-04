@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Team — ContentForge AI</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+<link href="../css/style.css" rel="stylesheet">
+</head>
+<body>
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-logo"><div class="logo-icon">⚡</div><span class="logo-text">ContentForge AI</span></div>
+  <nav class="sidebar-nav">
+    <div class="nav-section-label">Main</div>
+    <a href="dashboard.html" class="nav-item"><i class="bi bi-grid-1x2-fill"></i> Dashboard</a>
+    <a href="generate.html" class="nav-item"><i class="bi bi-stars"></i> Generate Content <span class="nav-badge new">AI</span></a>
+    <a href="library.html" class="nav-item"><i class="bi bi-collection-fill"></i> Content Library</a>
+    <a href="templates.html" class="nav-item"><i class="bi bi-layout-text-window-reverse"></i> Templates</a>
+    <a href="calendar.html" class="nav-item"><i class="bi bi-calendar3"></i> Content Calendar</a>
+    <div class="nav-section-label">Publish</div>
+    <a href="linkedin.html" class="nav-item"><i class="bi bi-linkedin"></i> LinkedIn Publisher</a>
+    <div class="nav-section-label">Workspace</div>
+    <a href="brand-voice.html" class="nav-item"><i class="bi bi-mic-fill"></i> Brand Voice</a>
+    <a href="team.html" class="nav-item active"><i class="bi bi-people-fill"></i> Team</a>
+    <a href="analytics.html" class="nav-item"><i class="bi bi-bar-chart-fill"></i> Analytics</a>
+    <div class="nav-section-label">Account</div>
+    <a href="billing.html" class="nav-item"><i class="bi bi-credit-card-fill"></i> Billing & Plans</a>
+    <a href="settings.html" class="nav-item"><i class="bi bi-gear-fill"></i> Settings</a>
+  </nav>
+  <div class="sidebar-footer">
+    <div class="credit-meter mb-3"><div class="credit-numbers"><span class="credit-used">32,450 <small style="font-weight:400;font-size:11px;color:var(--text-muted)">words</small></span><span class="credit-total">50,000</span></div><div class="progress-custom"><div class="progress-bar" data-width="65"></div></div></div>
+    <div class="user-card"><div class="user-avatar">JD</div><div class="user-info"><div class="user-name">John Doe</div><div class="user-plan">Starter Plan</div></div></div>
+  </div>
+</aside>
+
+<header class="topbar">
+  <button id="hamburgerBtn" class="icon-btn d-lg-none" style="border:none;background:transparent;"><i class="bi bi-list" style="font-size:20px;"></i></button>
+  <span class="topbar-title">Team Management</span>
+  <div class="topbar-actions">
+    <button class="btn-primary-custom" style="padding:8px 16px;font-size:13px;" onclick="document.getElementById('inviteModal').style.display='flex'"><i class="bi bi-person-plus-fill"></i> Invite Member</button>
+    <div class="icon-btn"><i class="bi bi-bell-fill"></i><span class="notif-dot"></span></div>
+  </div>
+</header>
+
+<main class="main-content">
+
+  <!-- Workspace Info -->
+  <div class="row g-4 mb-4">
+    <div class="col-md-4">
+      <div class="stat-card blue">
+        <div class="stat-icon blue"><i class="bi bi-people-fill"></i></div>
+        <div><div class="stat-value">3</div><div class="stat-label">Team Members</div><div class="stat-change">1 pending invite</div></div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="stat-card green">
+        <div class="stat-icon green"><i class="bi bi-chat-text-fill"></i></div>
+        <div><div class="stat-value">142</div><div class="stat-label">Total Content Created</div><div class="stat-change">This month</div></div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="stat-card orange">
+        <div class="stat-icon orange"><i class="bi bi-building"></i></div>
+        <div><div class="stat-value">Starter</div><div class="stat-label">Workspace Plan</div><div class="stat-change"><a href="billing.html" style="color:var(--primary);">Upgrade for more seats →</a></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Invite Bar -->
+  <div class="card mb-4">
+    <div class="card-header"><div class="card-title"><i class="bi bi-envelope-fill text-primary me-2"></i>Invite New Member</div></div>
+    <div class="row g-3 align-items-end">
+      <div class="col-md-5"><label class="form-label-custom">Email Address</label><input type="email" class="form-control-custom" placeholder="colleague@company.com"></div>
+      <div class="col-md-3"><label class="form-label-custom">Role</label>
+        <select class="form-control-custom">
+          <option>Editor — Can create & edit</option>
+          <option>Viewer — Read only</option>
+          <option>Admin — Full access</option>
+        </select>
+      </div>
+      <div class="col-md-4">
+        <label class="form-label-custom">Personal Message <small style="color:var(--text-muted);font-weight:400;">(optional)</small></label>
+        <input type="text" class="form-control-custom" placeholder="Hey, join our content workspace!">
+      </div>
+      <div class="col-12">
+        <button class="btn-primary-custom" onclick="showToast('Invitation sent successfully!')"><i class="bi bi-send-fill"></i> Send Invitation</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Members Table -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">Workspace Members</div>
+      <div class="topbar-search" style="width:220px;">
+        <i class="bi bi-search" style="color:var(--text-muted);font-size:12px;"></i>
+        <input type="text" placeholder="Search members..." style="background:none;border:none;outline:none;color:var(--white);font-size:13px;width:100%;font-family:'DM Sans',sans-serif;">
+      </div>
+    </div>
+    <div class="table-responsive">
+      <table class="table-custom">
+        <thead>
+          <tr><th>Member</th><th>Role</th><th>Content Created</th><th>Last Active</th><th>Status</th><th>Actions</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div class="d-flex align-items-center gap-3">
+                <div class="user-avatar" style="width:36px;height:36px;font-size:12px;">JD</div>
+                <div><div style="font-weight:600;color:var(--white);font-size:13.5px;">John Doe</div><div style="font-size:11px;color:var(--text-muted);">john.doe@company.com</div></div>
+              </div>
+            </td>
+            <td><span class="badge-custom badge-blue">Admin</span></td>
+            <td style="font-weight:600;color:var(--white);">98</td>
+            <td>Just now</td>
+            <td><span class="badge-custom badge-green"><i class="bi bi-circle-fill me-1" style="font-size:8px;"></i>Active</span></td>
+            <td><span style="font-size:12px;color:var(--text-muted);">You (Owner)</span></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="d-flex align-items-center gap-3">
+                <div class="user-avatar" style="width:36px;height:36px;font-size:12px;background:linear-gradient(135deg,#A78BFA,#7C3AED);">SM</div>
+                <div><div style="font-weight:600;color:var(--white);font-size:13.5px;">Sarah Miller</div><div style="font-size:11px;color:var(--text-muted);">sarah@company.com</div></div>
+              </div>
+            </td>
+            <td><span class="badge-custom badge-orange">Editor</span></td>
+            <td style="font-weight:600;color:var(--white);">32</td>
+            <td>2 hours ago</td>
+            <td><span class="badge-custom badge-green"><i class="bi bi-circle-fill me-1" style="font-size:8px;"></i>Active</span></td>
+            <td>
+              <div class="d-flex gap-2">
+                <select class="form-control-custom" style="width:auto;padding:5px 10px;font-size:12px;" onchange="showToast('Role updated!')">
+                  <option>Editor</option><option>Admin</option><option>Viewer</option>
+                </select>
+                <button class="btn-danger-custom" style="padding:5px 10px;font-size:12px;" onclick="showToast('Member removed','error')"><i class="bi bi-person-dash"></i></button>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="d-flex align-items-center gap-3">
+                <div class="user-avatar" style="width:36px;height:36px;font-size:12px;background:linear-gradient(135deg,#34D399,#059669);">TK</div>
+                <div><div style="font-weight:600;color:var(--white);font-size:13.5px;">Tom King</div><div style="font-size:11px;color:var(--text-muted);">tom.king@company.com</div></div>
+              </div>
+            </td>
+            <td><span class="badge-custom badge-gray">Viewer</span></td>
+            <td style="color:var(--text-muted);">—</td>
+            <td style="color:var(--text-muted);">Never</td>
+            <td><span class="badge-custom badge-orange"><i class="bi bi-clock me-1" style="font-size:8px;"></i>Pending</span></td>
+            <td>
+              <div class="d-flex gap-2">
+                <button class="btn-ghost" style="padding:5px 12px;font-size:12px;" onclick="showToast('Invite resent!')"><i class="bi bi-arrow-repeat"></i> Resend</button>
+                <button class="btn-danger-custom" style="padding:5px 10px;font-size:12px;" onclick="showToast('Invite revoked','error')"><i class="bi bi-x-lg"></i></button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Role Permissions -->
+  <div class="card mt-4">
+    <div class="card-header"><div class="card-title"><i class="bi bi-shield-fill-check text-accent me-2"></i>Role Permissions</div></div>
+    <div class="table-responsive">
+      <table class="table-custom">
+        <thead><tr><th>Permission</th><th>Admin</th><th>Editor</th><th>Viewer</th></tr></thead>
+        <tbody>
+          <tr><td>Generate AI content</td><td><i class="bi bi-check-circle-fill text-accent"></i></td><td><i class="bi bi-check-circle-fill text-accent"></i></td><td><i class="bi bi-check-circle-fill text-accent"></i></td></tr>
+          <tr><td>View content library</td><td><i class="bi bi-check-circle-fill text-accent"></i></td><td><i class="bi bi-check-circle-fill text-accent"></i></td><td><i class="bi bi-check-circle-fill text-accent"></i></td></tr>
+          <tr><td>Create & edit content</td><td><i class="bi bi-check-circle-fill text-accent"></i></td><td><i class="bi bi-check-circle-fill text-accent"></i></td><td><i class="bi bi-x-circle-fill text-danger-custom"></i></td></tr>
+          <tr><td>Publish to LinkedIn</td><td><i class="bi bi-check-circle-fill text-accent"></i></td><td><i class="bi bi-check-circle-fill text-accent"></i></td><td><i class="bi bi-x-circle-fill text-danger-custom"></i></td></tr>
+          <tr><td>Manage brand voices</td><td><i class="bi bi-check-circle-fill text-accent"></i></td><td><i class="bi bi-x-circle-fill text-danger-custom"></i></td><td><i class="bi bi-x-circle-fill text-danger-custom"></i></td></tr>
+          <tr><td>Invite / remove members</td><td><i class="bi bi-check-circle-fill text-accent"></i></td><td><i class="bi bi-x-circle-fill text-danger-custom"></i></td><td><i class="bi bi-x-circle-fill text-danger-custom"></i></td></tr>
+          <tr><td>Manage billing</td><td><i class="bi bi-check-circle-fill text-accent"></i></td><td><i class="bi bi-x-circle-fill text-danger-custom"></i></td><td><i class="bi bi-x-circle-fill text-danger-custom"></i></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</main>
+
+<div id="toastContainer" class="toast-container"></div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../js/app.js"></script>
+</body>
+</html>

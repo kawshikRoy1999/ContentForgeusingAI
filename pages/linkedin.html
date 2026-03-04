@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LinkedIn Publisher — ContentForge AI</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+<link href="../css/style.css" rel="stylesheet">
+</head>
+<body>
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-logo"><div class="logo-icon">⚡</div><span class="logo-text">ContentForge AI</span></div>
+  <nav class="sidebar-nav">
+    <div class="nav-section-label">Main</div>
+    <a href="dashboard.html" class="nav-item"><i class="bi bi-grid-1x2-fill"></i> Dashboard</a>
+    <a href="generate.html" class="nav-item"><i class="bi bi-stars"></i> Generate Content</a>
+    <a href="library.html" class="nav-item"><i class="bi bi-collection-fill"></i> Content Library</a>
+    <a href="templates.html" class="nav-item"><i class="bi bi-layout-text-window-reverse"></i> Templates</a>
+    <a href="calendar.html" class="nav-item"><i class="bi bi-calendar3"></i> Content Calendar</a>
+    <div class="nav-section-label">Publish</div>
+    <a href="linkedin.html" class="nav-item active"><i class="bi bi-linkedin"></i> LinkedIn Publisher</a>
+    <div class="nav-section-label">Workspace</div>
+    <a href="brand-voice.html" class="nav-item"><i class="bi bi-mic-fill"></i> Brand Voice</a>
+    <a href="team.html" class="nav-item"><i class="bi bi-people-fill"></i> Team</a>
+    <a href="analytics.html" class="nav-item"><i class="bi bi-bar-chart-fill"></i> Analytics</a>
+    <div class="nav-section-label">Account</div>
+    <a href="billing.html" class="nav-item"><i class="bi bi-credit-card-fill"></i> Billing & Plans</a>
+    <a href="settings.html" class="nav-item"><i class="bi bi-gear-fill"></i> Settings</a>
+  </nav>
+  <div class="sidebar-footer">
+    <div class="credit-meter mb-3">
+      <div class="credit-numbers"><span class="credit-used">32,450 <small style="font-weight:400;font-size:11px;color:var(--text-muted)">words used</small></span><span class="credit-total">50,000</span></div>
+      <div class="progress-custom"><div class="progress-bar" data-width="65"></div></div>
+    </div>
+    <div class="user-card"><div class="user-avatar">JD</div><div class="user-info"><div class="user-name">John Doe</div><div class="user-plan">Starter Plan</div></div></div>
+  </div>
+</aside>
+
+<header class="topbar">
+  <button id="hamburgerBtn" class="icon-btn d-lg-none" style="border:none;background:transparent;"><i class="bi bi-list" style="font-size:20px;"></i></button>
+  <span class="topbar-title"><i class="bi bi-linkedin" style="color:#0A66C2;"></i> LinkedIn Publisher</span>
+  <div class="topbar-actions">
+    <div class="icon-btn"><i class="bi bi-bell-fill"></i><span class="notif-dot"></span></div>
+  </div>
+</header>
+
+<main class="main-content">
+  <!-- Connected Account Banner -->
+  <div style="background:linear-gradient(135deg,rgba(10,102,194,0.1),rgba(10,132,255,0.05));border:1px solid rgba(10,102,194,0.3);border-radius:var(--radius);padding:16px 20px;margin-bottom:24px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+    <div style="width:44px;height:44px;background:#0A66C2;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:22px;color:white;flex-shrink:0;">
+      <i class="bi bi-linkedin"></i>
+    </div>
+    <div style="flex:1;">
+      <div style="font-weight:700;font-size:14px;">Connected as <span style="color:#0A66C2;">John Doe</span></div>
+      <div style="font-size:12px;color:var(--text-muted);">Personal Profile · Company Page: Acme Corp</div>
+    </div>
+    <span class="badge-custom badge-green"><i class="bi bi-check-circle-fill me-1"></i>Connected</span>
+    <button class="btn-ghost" style="font-size:12px;padding:6px 14px;" onclick="showToast('LinkedIn account disconnected','error')">Disconnect</button>
+  </div>
+
+  <div class="row g-4">
+    <!-- Compose Post -->
+    <div class="col-lg-7">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title"><i class="bi bi-pencil-square text-primary me-2"></i>Compose Post</div>
+          <button class="btn-ghost" style="font-size:12px;padding:6px 12px;" onclick="generateLinkedInPost()">
+            <i class="bi bi-stars"></i> AI Generate
+          </button>
+        </div>
+
+        <!-- Post target -->
+        <div class="mb-3">
+          <label class="form-label-custom">Post As</label>
+          <select class="form-control-custom" id="postAs">
+            <option>👤 John Doe (Personal Profile)</option>
+            <option>🏢 Acme Corp (Company Page)</option>
+          </select>
+        </div>
+
+        <!-- Content area -->
+        <div class="mb-2">
+          <label class="form-label-custom">Post Content</label>
+          <textarea class="form-control-custom" id="linkedInText" rows="8"
+            placeholder="Write your LinkedIn post here, or click 'AI Generate' to create one automatically...&#10;&#10;Tip: Posts with 3-5 paragraphs and a question at the end get the most engagement 📈"
+            style="resize:vertical;"
+            oninput="updateCharCount()"></textarea>
+        </div>
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <div style="font-size:11px;color:var(--text-muted);">Suggested: 150–300 words for best engagement</div>
+          <span id="liCharCount" style="font-size:12px;color:var(--text-muted);">0 / 3000</span>
+        </div>
+
+        <!-- Hashtags -->
+        <div class="mb-3">
+          <label class="form-label-custom">Hashtags</label>
+          <input type="text" class="form-control-custom" id="hashtagInput" placeholder="#ContentMarketing #AI #Marketing" value="#ContentMarketing #AI #SaaS #Marketing">
+          <button class="btn-ghost mt-2" style="font-size:12px;padding:5px 12px;" onclick="suggestHashtags()">
+            <i class="bi bi-stars"></i> AI Suggest Hashtags
+          </button>
+        </div>
+
+        <!-- Image attachment -->
+        <div class="mb-4">
+          <label class="form-label-custom">Attach Image <small style="color:var(--text-muted);font-weight:400;">(optional)</small></label>
+          <div style="border:2px dashed var(--border);border-radius:var(--radius-sm);padding:20px;text-align:center;cursor:pointer;transition:var(--transition);" id="dropZone"
+            ondragover="this.style.borderColor='var(--primary)'" ondragleave="this.style.borderColor='var(--border)'"
+            onclick="showToast('File picker opened!')">
+            <i class="bi bi-image" style="font-size:28px;color:var(--border);display:block;margin-bottom:8px;"></i>
+            <div style="font-size:13px;color:var(--text-muted);">Drag & drop image or <span style="color:var(--primary);font-weight:600;">click to browse</span></div>
+            <div style="font-size:11px;color:var(--border);margin-top:4px;">PNG, JPG, GIF up to 10MB</div>
+          </div>
+        </div>
+
+        <!-- Schedule or Post -->
+        <div class="d-flex gap-2 align-items-center flex-wrap">
+          <div class="d-flex align-items-center gap-2 me-2">
+            <input type="checkbox" id="scheduleCheck" style="accent-color:var(--primary);" onchange="toggleSchedule()">
+            <label for="scheduleCheck" style="font-size:13px;font-weight:500;cursor:pointer;">Schedule for later</label>
+          </div>
+          <div id="schedulePicker" style="display:none;">
+            <input type="datetime-local" class="form-control-custom" style="width:auto;padding:8px 12px;font-size:13px;">
+          </div>
+          <div class="ms-auto d-flex gap-2">
+            <button class="btn-ghost" onclick="showToast('Saved as draft!')"><i class="bi bi-save"></i> Save Draft</button>
+            <button class="btn-linkedin" onclick="publishPost()"><i class="bi bi-linkedin"></i> Publish Now</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: Preview + History -->
+    <div class="col-lg-5">
+      <!-- Preview -->
+      <div class="card mb-4">
+        <div class="card-header">
+          <div class="card-title">Post Preview</div>
+          <span class="badge-custom badge-blue" style="font-size:10px;">LinkedIn</span>
+        </div>
+        <div class="linkedin-post-preview">
+          <div class="linkedin-preview-header">
+            <div class="linkedin-preview-avatar">JD</div>
+            <div>
+              <div style="font-weight:700;font-size:13px;">John Doe</div>
+              <div style="font-size:11px;color:var(--text-muted);">Marketing Manager · Now</div>
+            </div>
+            <i class="bi bi-three-dots ms-auto" style="color:var(--text-muted);"></i>
+          </div>
+          <div id="liPreview" style="font-size:13.5px;line-height:1.7;color:var(--text-light);white-space:pre-wrap;min-height:80px;">
+            <span style="color:var(--text-muted);">Your post preview will appear here as you type...</span>
+          </div>
+          <div id="liHashPreview" style="color:#0A66C2;font-size:13px;margin-top:10px;"></div>
+          <div class="divider"></div>
+          <div style="display:flex;gap:20px;font-size:13px;color:var(--text-muted);">
+            <span><i class="bi bi-hand-thumbs-up"></i> Like</span>
+            <span><i class="bi bi-chat"></i> Comment</span>
+            <span><i class="bi bi-arrow-repeat"></i> Repost</span>
+            <span><i class="bi bi-send"></i> Send</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Post History -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Post History</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div style="background:var(--dark-3);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px 14px;">
+            <div class="d-flex align-items-center justify-content-between mb-1">
+              <span class="badge-custom badge-green" style="font-size:10px;"><i class="bi bi-check-circle-fill me-1"></i>Published</span>
+              <span style="font-size:11px;color:var(--text-muted);">Mar 3, 2025 · 9:00 AM</span>
+            </div>
+            <div style="font-size:13px;color:var(--text-light);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">🚀 Big news for content creators! We just crossed 10,000 users...</div>
+            <div style="font-size:12px;color:var(--text-muted);margin-top:6px;"><i class="bi bi-hand-thumbs-up"></i> 142 &nbsp; <i class="bi bi-chat"></i> 38 &nbsp; <i class="bi bi-arrow-repeat"></i> 12</div>
+          </div>
+          <div style="background:var(--dark-3);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px 14px;">
+            <div class="d-flex align-items-center justify-content-between mb-1">
+              <span class="badge-custom badge-green" style="font-size:10px;"><i class="bi bi-check-circle-fill me-1"></i>Published</span>
+              <span style="font-size:11px;color:var(--text-muted);">Mar 1, 2025 · 10:30 AM</span>
+            </div>
+            <div style="font-size:13px;color:var(--text-light);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">The future of content marketing is AI. Here's why your team...</div>
+            <div style="font-size:12px;color:var(--text-muted);margin-top:6px;"><i class="bi bi-hand-thumbs-up"></i> 89 &nbsp; <i class="bi bi-chat"></i> 21 &nbsp; <i class="bi bi-arrow-repeat"></i> 7</div>
+          </div>
+          <div style="background:var(--dark-3);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px 14px;">
+            <div class="d-flex align-items-center justify-content-between mb-1">
+              <span class="badge-custom badge-orange" style="font-size:10px;"><i class="bi bi-clock me-1"></i>Scheduled</span>
+              <span style="font-size:11px;color:var(--text-muted);">Mar 5, 2025 · 9:00 AM</span>
+            </div>
+            <div style="font-size:13px;color:var(--text-light);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">5 AI tools every marketer needs in their 2025 toolkit...</div>
+            <div style="font-size:12px;color:var(--text-muted);margin-top:6px;">Scheduled · Not published yet</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<div id="toastContainer" class="toast-container"></div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../js/app.js"></script>
+<script>
+const liText = document.getElementById('linkedInText');
+const liPreview = document.getElementById('liPreview');
+const liHashPreview = document.getElementById('liHashPreview');
+
+liText.addEventListener('input', () => {
+  const val = liText.value;
+  liPreview.textContent = val || '';
+  if (!val) liPreview.innerHTML = '<span style="color:var(--text-muted);">Your post preview will appear here as you type...</span>';
+  const len = val.length;
+  document.getElementById('liCharCount').textContent = `${len} / 3000`;
+  document.getElementById('liCharCount').style.color = len > 2800 ? 'var(--danger)' : 'var(--text-muted)';
+});
+
+document.getElementById('hashtagInput').addEventListener('input', function() {
+  liHashPreview.textContent = this.value;
+});
+liHashPreview.textContent = document.getElementById('hashtagInput').value;
+
+function toggleSchedule() {
+  const ch = document.getElementById('scheduleCheck');
+  document.getElementById('schedulePicker').style.display = ch.checked ? 'block' : 'none';
+}
+
+function publishPost() {
+  const text = liText.value.trim();
+  if (!text) { showToast('Please write your post first', 'error'); return; }
+  showToast('Publishing to LinkedIn...');
+  setTimeout(() => showToast('✅ Published to LinkedIn successfully!'), 2000);
+}
+
+function generateLinkedInPost() {
+  showToast('AI is crafting your LinkedIn post...');
+  setTimeout(() => {
+    liText.value = `🚀 I've been exploring how AI is transforming content creation for marketing teams — and the results are remarkable.
+
+Here's what we discovered after 3 months of using AI-powered content tools:
+
+✅ 3x faster content production
+✅ 40% higher engagement on posts
+✅ Consistent brand voice across all channels
+
+The key insight? AI doesn't replace creative thinking — it amplifies it.
+
+Our team now spends less time on the "blank page" problem and more time on strategy, storytelling, and human connection.
+
+Are you using AI in your content workflow? I'd love to hear what's working for you. 👇
+
+#ContentMarketing #AI #Marketing #SaaS #ContentCreation`;
+    liText.dispatchEvent(new Event('input'));
+    showToast('LinkedIn post generated!');
+  }, 1800);
+}
+
+function suggestHashtags() {
+  showToast('Generating hashtag suggestions...');
+  setTimeout(() => {
+    document.getElementById('hashtagInput').value = '#ContentMarketing #AI #Marketing #SaaS #GrowthMarketing #B2BMarketing #ContentStrategy';
+    document.getElementById('hashtagInput').dispatchEvent(new Event('input'));
+    showToast('Hashtags suggested!');
+  }, 1200);
+}
+</script>
+</body>
+</html>

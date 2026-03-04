@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Analytics — ContentForge AI</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+<link href="../css/style.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-logo"><div class="logo-icon">⚡</div><span class="logo-text">ContentForge AI</span></div>
+  <nav class="sidebar-nav">
+    <div class="nav-section-label">Main</div>
+    <a href="dashboard.html" class="nav-item"><i class="bi bi-grid-1x2-fill"></i> Dashboard</a>
+    <a href="generate.html" class="nav-item"><i class="bi bi-stars"></i> Generate Content <span class="nav-badge new">AI</span></a>
+    <a href="library.html" class="nav-item"><i class="bi bi-collection-fill"></i> Content Library</a>
+    <a href="templates.html" class="nav-item"><i class="bi bi-layout-text-window-reverse"></i> Templates</a>
+    <a href="calendar.html" class="nav-item"><i class="bi bi-calendar3"></i> Content Calendar</a>
+    <div class="nav-section-label">Publish</div>
+    <a href="linkedin.html" class="nav-item"><i class="bi bi-linkedin"></i> LinkedIn Publisher</a>
+    <div class="nav-section-label">Workspace</div>
+    <a href="brand-voice.html" class="nav-item"><i class="bi bi-mic-fill"></i> Brand Voice</a>
+    <a href="team.html" class="nav-item"><i class="bi bi-people-fill"></i> Team</a>
+    <a href="analytics.html" class="nav-item active"><i class="bi bi-bar-chart-fill"></i> Analytics</a>
+    <div class="nav-section-label">Account</div>
+    <a href="billing.html" class="nav-item"><i class="bi bi-credit-card-fill"></i> Billing & Plans</a>
+    <a href="settings.html" class="nav-item"><i class="bi bi-gear-fill"></i> Settings</a>
+  </nav>
+  <div class="sidebar-footer">
+    <div class="credit-meter mb-3">
+      <div class="credit-numbers"><span class="credit-used">32,450 <small style="font-weight:400;font-size:11px;color:var(--text-muted)">words used</small></span><span class="credit-total">50,000</span></div>
+      <div class="progress-custom"><div class="progress-bar" data-width="65"></div></div>
+      <div style="font-size:11px;color:var(--text-muted);margin-top:5px;">Starter Plan · Resets Apr 1</div>
+    </div>
+    <div class="user-card">
+      <div class="user-avatar">JD</div>
+      <div class="user-info"><div class="user-name">John Doe</div><div class="user-plan">Starter Plan</div></div>
+      <i class="bi bi-three-dots-vertical ms-auto" style="color:var(--text-muted);font-size:14px;"></i>
+    </div>
+  </div>
+</aside>
+
+<!-- TOPBAR -->
+<header class="topbar">
+  <button id="hamburgerBtn" class="icon-btn d-lg-none" style="border:none;background:transparent;"><i class="bi bi-list" style="font-size:20px;"></i></button>
+  <span class="topbar-title">Analytics</span>
+  <div class="topbar-actions">
+    <div class="d-flex align-items-center gap-2 me-1">
+      <select class="form-control-custom" style="width:auto;padding:7px 12px;font-size:12px;" id="dateRange" onchange="updateCharts()">
+        <option value="7">Last 7 days</option>
+        <option value="30" selected>Last 30 days</option>
+        <option value="90">Last 90 days</option>
+      </select>
+    </div>
+    <button class="btn-ghost" style="font-size:13px;padding:8px 14px;" onclick="showToast('Report exported as CSV!')">
+      <i class="bi bi-download"></i> Export CSV
+    </button>
+    <button class="btn-ghost" style="font-size:13px;padding:8px 14px;" onclick="showToast('PDF report downloading!')">
+      <i class="bi bi-file-pdf"></i> PDF
+    </button>
+    <div class="icon-btn"><i class="bi bi-bell-fill"></i><span class="notif-dot"></span></div>
+  </div>
+</header>
+
+<!-- MAIN -->
+<main class="main-content">
+
+  <!-- ===== STAT CARDS ===== -->
+  <div class="row g-3 mb-4">
+    <div class="col-6 col-xl-3">
+      <div class="stat-card blue">
+        <div class="stat-icon blue"><i class="bi bi-chat-text-fill"></i></div>
+        <div>
+          <div class="stat-value counter" data-target="32450">32,450</div>
+          <div class="stat-label">Words Generated</div>
+          <div class="stat-change"><i class="bi bi-arrow-up-short"></i> +18% vs last period</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-6 col-xl-3">
+      <div class="stat-card green">
+        <div class="stat-icon green"><i class="bi bi-file-text-fill"></i></div>
+        <div>
+          <div class="stat-value counter" data-target="142">142</div>
+          <div class="stat-label">Content Pieces</div>
+          <div class="stat-change"><i class="bi bi-arrow-up-short"></i> +24% vs last period</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-6 col-xl-3">
+      <div class="stat-card orange">
+        <div class="stat-icon orange"><i class="bi bi-linkedin"></i></div>
+        <div>
+          <div class="stat-value counter" data-target="28">28</div>
+          <div class="stat-label">LinkedIn Posts</div>
+          <div class="stat-change"><i class="bi bi-arrow-up-short"></i> +12% vs last period</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-6 col-xl-3">
+      <div class="stat-card red">
+        <div class="stat-icon red"><i class="bi bi-clock-fill"></i></div>
+        <div>
+          <div class="stat-value counter" data-target="47">47</div>
+          <div class="stat-label">Hours Saved</div>
+          <div class="stat-change"><i class="bi bi-arrow-up-short"></i> +31% vs last period</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== CHARTS ROW 1 ===== -->
+  <div class="row g-4 mb-4">
+
+    <!-- Words Generated Chart -->
+    <div class="col-lg-8">
+      <div class="card h-100">
+        <div class="card-header">
+          <div class="card-title"><i class="bi bi-graph-up text-primary me-2"></i>Words Generated Over Time</div>
+          <div class="d-flex gap-2">
+            <button class="btn-ghost" style="padding:4px 10px;font-size:11px;" onclick="setChartType('bar')">Bar</button>
+            <button class="btn-primary-custom" style="padding:4px 10px;font-size:11px;" onclick="setChartType('line')">Line</button>
+          </div>
+        </div>
+        <canvas id="wordsChart" height="120"></canvas>
+      </div>
+    </div>
+
+    <!-- Content Type Doughnut -->
+    <div class="col-lg-4">
+      <div class="card h-100">
+        <div class="card-header">
+          <div class="card-title"><i class="bi bi-pie-chart-fill text-accent me-2"></i>Content Breakdown</div>
+        </div>
+        <div style="position:relative;height:180px;display:flex;align-items:center;justify-content:center;">
+          <canvas id="typeChart"></canvas>
+          <div style="position:absolute;text-align:center;pointer-events:none;">
+            <div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;" class="gradient-text">142</div>
+            <div style="font-size:11px;color:var(--text-muted);">Total</div>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-top:12px;">
+          <div class="d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center gap-8" style="gap:8px;"><span style="width:10px;height:10px;background:#0A84FF;border-radius:2px;display:inline-block;"></span><span style="font-size:12px;">Blog Posts</span></div>
+            <span style="font-size:12px;font-weight:700;">60 (42%)</span>
+          </div>
+          <div class="d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center gap-8" style="gap:8px;"><span style="width:10px;height:10px;background:#00D4A8;border-radius:2px;display:inline-block;"></span><span style="font-size:12px;">Social Media</span></div>
+            <span style="font-size:12px;font-weight:700;">40 (28%)</span>
+          </div>
+          <div class="d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center gap-8" style="gap:8px;"><span style="width:10px;height:10px;background:#FFB347;border-radius:2px;display:inline-block;"></span><span style="font-size:12px;">Email</span></div>
+            <span style="font-size:12px;font-weight:700;">25 (18%)</span>
+          </div>
+          <div class="d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center gap-8" style="gap:8px;"><span style="width:10px;height:10px;background:#FF4757;border-radius:2px;display:inline-block;"></span><span style="font-size:12px;">Ad Copy</span></div>
+            <span style="font-size:12px;font-weight:700;">17 (12%)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== CHARTS ROW 2 ===== -->
+  <div class="row g-4 mb-4">
+
+    <!-- Credit Usage -->
+    <div class="col-lg-6">
+      <div class="card h-100">
+        <div class="card-header">
+          <div class="card-title"><i class="bi bi-battery-half text-warning me-2"></i>Credit Usage This Month</div>
+          <span class="badge-custom badge-orange">65% used</span>
+        </div>
+
+        <!-- Big meter -->
+        <div style="text-align:center;margin:12px 0 20px;">
+          <svg width="180" height="100" viewBox="0 0 200 110">
+            <path d="M 20 100 A 80 80 0 0 1 180 100" stroke="#2A3047" stroke-width="16" fill="none" stroke-linecap="round"/>
+            <path d="M 20 100 A 80 80 0 0 1 180 100" stroke="url(#creditGrad)" stroke-width="16" fill="none" stroke-linecap="round"
+              stroke-dasharray="251" stroke-dashoffset="88" id="creditArc" style="transition:stroke-dashoffset 1.2s ease;"/>
+            <defs>
+              <linearGradient id="creditGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color:#0A84FF"/>
+                <stop offset="100%" style="stop-color:#00D4A8"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <div style="margin-top:-20px;">
+            <div style="font-family:'Syne',sans-serif;font-size:28px;font-weight:800;" class="gradient-text">32,450</div>
+            <div style="font-size:12px;color:var(--text-muted);">of 50,000 words used</div>
+          </div>
+        </div>
+
+        <div class="row g-2 text-center">
+          <div class="col-4">
+            <div style="background:var(--dark-3);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px;">
+              <div style="font-weight:800;font-size:16px;color:var(--primary);">17,550</div>
+              <div style="font-size:11px;color:var(--text-muted);">Remaining</div>
+            </div>
+          </div>
+          <div class="col-4">
+            <div style="background:var(--dark-3);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px;">
+              <div style="font-weight:800;font-size:16px;color:var(--accent);">12</div>
+              <div style="font-size:11px;color:var(--text-muted);">Days Left</div>
+            </div>
+          </div>
+          <div class="col-4">
+            <div style="background:var(--dark-3);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px;">
+              <div style="font-weight:800;font-size:16px;color:var(--warning);">~1,080</div>
+              <div style="font-size:11px;color:var(--text-muted);">Per Day</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+        <div style="font-size:12px;color:var(--text-muted);display:flex;align-items:center;gap:8px;">
+          <i class="bi bi-info-circle text-primary"></i>
+          At current pace you'll use <strong style="color:var(--white);">~43,000</strong> words this month.
+          <a href="billing.html" style="color:var(--primary);margin-left:auto;white-space:nowrap;">Upgrade →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Daily Activity -->
+    <div class="col-lg-6">
+      <div class="card h-100">
+        <div class="card-header">
+          <div class="card-title"><i class="bi bi-activity text-primary me-2"></i>Daily Activity Heatmap</div>
+          <span style="font-size:12px;color:var(--text-muted);">Mar 2025</span>
+        </div>
+        <div style="font-size:11px;color:var(--text-muted);margin-bottom:10px;">Days with most content creation activity</div>
+        <div id="heatmap" style="display:grid;grid-template-columns:repeat(7,1fr);gap:4px;"></div>
+        <div class="d-flex align-items-center gap-2 mt-3">
+          <span style="font-size:11px;color:var(--text-muted);">Less</span>
+          <span style="width:14px;height:14px;background:#1E2230;border-radius:3px;display:inline-block;border:1px solid var(--border);"></span>
+          <span style="width:14px;height:14px;background:rgba(10,132,255,0.2);border-radius:3px;display:inline-block;"></span>
+          <span style="width:14px;height:14px;background:rgba(10,132,255,0.5);border-radius:3px;display:inline-block;"></span>
+          <span style="width:14px;height:14px;background:#0A84FF;border-radius:3px;display:inline-block;"></span>
+          <span style="font-size:11px;color:var(--text-muted);">More</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== LINKEDIN PERFORMANCE ===== -->
+  <div class="card mb-4">
+    <div class="card-header">
+      <div class="card-title"><i class="bi bi-linkedin" style="color:#0A66C2;margin-right:8px;"></i>LinkedIn Performance</div>
+      <a href="linkedin.html" style="font-size:12px;color:var(--primary);">View Posts →</a>
+    </div>
+
+    <!-- LinkedIn Stats Row -->
+    <div class="row g-3 mb-4">
+      <div class="col-6 col-md-3">
+        <div style="text-align:center;padding:16px;background:var(--dark-3);border:1px solid var(--border);border-radius:var(--radius-sm);">
+          <div style="font-family:'Syne',sans-serif;font-size:26px;font-weight:800;color:#0A66C2;">28</div>
+          <div style="font-size:12px;color:var(--text-muted);margin-top:4px;">Posts Published</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div style="text-align:center;padding:16px;background:var(--dark-3);border:1px solid var(--border);border-radius:var(--radius-sm);">
+          <div style="font-family:'Syne',sans-serif;font-size:26px;font-weight:800;" class="gradient-text">3,241</div>
+          <div style="font-size:12px;color:var(--text-muted);margin-top:4px;">Total Likes</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div style="text-align:center;padding:16px;background:var(--dark-3);border:1px solid var(--border);border-radius:var(--radius-sm);">
+          <div style="font-family:'Syne',sans-serif;font-size:26px;font-weight:800;color:var(--accent);">847</div>
+          <div style="font-size:12px;color:var(--text-muted);margin-top:4px;">Comments</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div style="text-align:center;padding:16px;background:var(--dark-3);border:1px solid var(--border);border-radius:var(--radius-sm);">
+          <div style="font-family:'Syne',sans-serif;font-size:26px;font-weight:800;color:var(--warning);">4.2%</div>
+          <div style="font-size:12px;color:var(--text-muted);margin-top:4px;">Avg Engagement</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LinkedIn Chart -->
+    <canvas id="linkedinChart" height="70"></canvas>
+  </div>
+
+  <!-- ===== BOTTOM ROW ===== -->
+  <div class="row g-4">
+
+    <!-- Top Content -->
+    <div class="col-lg-7">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title"><i class="bi bi-trophy-fill text-warning me-2"></i>Top Performing Content</div>
+          <select class="form-control-custom" style="width:auto;padding:5px 10px;font-size:11px;">
+            <option>By Words</option><option>By Date</option><option>By Type</option>
+          </select>
+        </div>
+        <div class="table-responsive">
+          <table class="table-custom">
+            <thead>
+              <tr><th>#</th><th>Title</th><th>Type</th><th>Words</th><th>Date</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="color:var(--warning);font-weight:800;">🥇</td>
+                <td style="color:var(--white);font-weight:500;">How AI is Changing Content Marketing in 2025</td>
+                <td><span class="badge-custom badge-blue" style="font-size:10px;">Blog</span></td>
+                <td style="font-weight:700;color:var(--white);">1,240</td>
+                <td style="color:var(--text-muted);">Mar 4</td>
+              </tr>
+              <tr>
+                <td style="color:var(--text-muted);font-weight:800;">🥈</td>
+                <td style="color:var(--white);font-weight:500;">YouTube Script: AI Tools for Marketers</td>
+                <td><span class="badge-custom badge-gray" style="font-size:10px;">Video</span></td>
+                <td style="font-weight:700;color:var(--white);">920</td>
+                <td style="color:var(--text-muted);">Feb 28</td>
+              </tr>
+              <tr>
+                <td style="color:var(--text-muted);font-weight:800;">🥉</td>
+                <td style="color:var(--white);font-weight:500;">Q1 Newsletter — March Edition</td>
+                <td><span class="badge-custom badge-orange" style="font-size:10px;">Email</span></td>
+                <td style="font-weight:700;color:var(--white);">680</td>
+                <td style="color:var(--text-muted);">Mar 2</td>
+              </tr>
+              <tr>
+                <td style="color:var(--text-muted);">4</td>
+                <td style="color:var(--white);font-weight:500;">5 Reasons Your Team Needs ContentForge</td>
+                <td><span class="badge-custom badge-green" style="font-size:10px;">Social</span></td>
+                <td style="font-weight:700;color:var(--white);">320</td>
+                <td style="color:var(--text-muted);">Mar 3</td>
+              </tr>
+              <tr>
+                <td style="color:var(--text-muted);">5</td>
+                <td style="color:var(--white);font-weight:500;">Spring Sale Facebook Ad — Primary Text</td>
+                <td><span class="badge-custom badge-red" style="font-size:10px;">Ad Copy</span></td>
+                <td style="font-weight:700;color:var(--white);">180</td>
+                <td style="color:var(--text-muted);">Mar 1</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Team Activity -->
+    <div class="col-lg-5">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title"><i class="bi bi-people-fill text-primary me-2"></i>Team Activity</div>
+          <a href="team.html" style="font-size:12px;color:var(--primary);">Manage →</a>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:16px;">
+          <!-- Member 1 -->
+          <div>
+            <div class="d-flex align-items-center justify-content-between mb-2">
+              <div class="d-flex align-items-center gap-10" style="gap:10px;">
+                <div class="user-avatar" style="width:32px;height:32px;font-size:11px;">JD</div>
+                <div>
+                  <div style="font-size:13px;font-weight:600;">John Doe</div>
+                  <div style="font-size:11px;color:var(--text-muted);">Admin</div>
+                </div>
+              </div>
+              <div style="text-align:right;">
+                <div style="font-size:13px;font-weight:700;color:var(--white);">98</div>
+                <div style="font-size:11px;color:var(--text-muted);">pieces</div>
+              </div>
+            </div>
+            <div class="progress-custom">
+              <div class="progress-bar" data-width="69"></div>
+            </div>
+            <div style="font-size:11px;color:var(--text-muted);margin-top:4px;">22,800 words · 69% of team total</div>
+          </div>
+
+          <!-- Member 2 -->
+          <div>
+            <div class="d-flex align-items-center justify-content-between mb-2">
+              <div class="d-flex align-items-center gap-10" style="gap:10px;">
+                <div class="user-avatar" style="width:32px;height:32px;font-size:11px;background:linear-gradient(135deg,#A78BFA,#7C3AED);">SM</div>
+                <div>
+                  <div style="font-size:13px;font-weight:600;">Sarah Miller</div>
+                  <div style="font-size:11px;color:var(--text-muted);">Editor</div>
+                </div>
+              </div>
+              <div style="text-align:right;">
+                <div style="font-size:13px;font-weight:700;color:var(--white);">32</div>
+                <div style="font-size:11px;color:var(--text-muted);">pieces</div>
+              </div>
+            </div>
+            <div class="progress-custom">
+              <div class="progress-bar" style="background:linear-gradient(90deg,#A78BFA,#7C3AED);" data-width="23"></div>
+            </div>
+            <div style="font-size:11px;color:var(--text-muted);margin-top:4px;">7,400 words · 23% of team total</div>
+          </div>
+
+          <!-- Member 3 -->
+          <div>
+            <div class="d-flex align-items-center justify-content-between mb-2">
+              <div class="d-flex align-items-center gap-10" style="gap:10px;">
+                <div class="user-avatar" style="width:32px;height:32px;font-size:11px;background:linear-gradient(135deg,#34D399,#059669);">TK</div>
+                <div>
+                  <div style="font-size:13px;font-weight:600;">Tom King</div>
+                  <div style="font-size:11px;color:var(--text-muted);">Viewer · Pending</div>
+                </div>
+              </div>
+              <div style="text-align:right;">
+                <div style="font-size:13px;font-weight:700;color:var(--text-muted);">—</div>
+                <div style="font-size:11px;color:var(--text-muted);">pieces</div>
+              </div>
+            </div>
+            <div class="progress-custom">
+              <div class="progress-bar" style="background:var(--border);" data-width="0"></div>
+            </div>
+            <div style="font-size:11px;color:var(--text-muted);margin-top:4px;">0 words · Invite pending</div>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+        <!-- Weekly summary -->
+        <div style="background:var(--dark-3);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px 16px;">
+          <div style="font-size:12px;font-weight:600;margin-bottom:8px;">This Week's Summary</div>
+          <div class="d-flex justify-content-between" style="font-size:12px;color:var(--text-muted);">
+            <span>Content created</span><span style="color:var(--white);font-weight:600;">24 pieces</span>
+          </div>
+          <div class="d-flex justify-content-between mt-1" style="font-size:12px;color:var(--text-muted);">
+            <span>Words generated</span><span style="color:var(--white);font-weight:600;">7,650</span>
+          </div>
+          <div class="d-flex justify-content-between mt-1" style="font-size:12px;color:var(--text-muted);">
+            <span>LinkedIn posts</span><span style="color:var(--white);font-weight:600;">5</span>
+          </div>
+          <div class="d-flex justify-content-between mt-1" style="font-size:12px;color:var(--text-muted);">
+            <span>Active members</span><span style="color:var(--accent);font-weight:600;">2 / 3</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== CONTENT TYPE BARS ===== -->
+  <div class="card mt-4">
+    <div class="card-header">
+      <div class="card-title"><i class="bi bi-bar-chart-steps text-accent me-2"></i>Content Production by Type — Monthly Trend</div>
+    </div>
+    <canvas id="trendChart" height="70"></canvas>
+  </div>
+
+</main>
+
+<div id="toastContainer" class="toast-container"></div>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../js/app.js"></script>
+
+<script>
+// ===== CHART DEFAULTS =====
+Chart.defaults.color = '#8892A4';
+Chart.defaults.borderColor = '#2A3047';
+Chart.defaults.font.family = "'DM Sans', sans-serif";
+
+const gradient = (ctx, color1, color2) => {
+  const g = ctx.createLinearGradient(0, 0, 0, 300);
+  g.addColorStop(0, color1);
+  g.addColorStop(1, color2);
+  return g;
+};
+
+// ===== WORDS GENERATED CHART =====
+const wordsCtx = document.getElementById('wordsChart').getContext('2d');
+const wordsData = {
+  labels: ['Mar 1','Mar 2','Mar 3','Mar 4','Mar 5','Mar 6','Mar 7','Mar 8','Mar 9','Mar 10',
+           'Mar 11','Mar 12','Mar 13','Mar 14','Mar 15','Mar 16','Mar 17','Mar 18','Mar 19','Mar 20',
+           'Mar 21','Mar 22','Mar 23','Mar 24','Mar 25','Mar 26','Mar 27','Mar 28','Mar 29','Mar 30'],
+  datasets: [{
+    label: 'Words Generated',
+    data: [820,1200,950,1800,600,0,450,1100,1650,980,
+           800,1300,550,1900,720,0,600,1400,2100,850,
+           700,1050,1750,900,1200,650,1800,1100,800,1400],
+    backgroundColor: ctx => {
+      const g = ctx.chart.ctx.createLinearGradient(0, 0, 0, 250);
+      g.addColorStop(0, 'rgba(10,132,255,0.6)');
+      g.addColorStop(1, 'rgba(0,212,168,0.1)');
+      return g;
+    },
+    borderColor: '#0A84FF',
+    borderWidth: 2,
+    borderRadius: 6,
+    borderSkipped: false,
+    tension: 0.4,
+    fill: true,
+    pointBackgroundColor: '#0A84FF',
+    pointRadius: 3,
+    pointHoverRadius: 6,
+  }]
+};
+
+let wordsChart = new Chart(wordsCtx, {
+  type: 'bar',
+  data: wordsData,
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        backgroundColor: '#1E2230',
+        borderColor: '#2A3047',
+        borderWidth: 1,
+        padding: 12,
+        callbacks: {
+          label: ctx => `  ${ctx.raw.toLocaleString()} words`
+        }
+      }
+    },
+    scales: {
+      x: { grid: { display: false }, ticks: { maxTicksLimit: 10 } },
+      y: { grid: { color: 'rgba(42,48,71,0.5)' }, ticks: { callback: v => v.toLocaleString() } }
+    }
+  }
+});
+
+function setChartType(type) {
+  wordsChart.config.type = type;
+  wordsChart.update();
+}
+
+// ===== DOUGHNUT CHART =====
+const typeCtx = document.getElementById('typeChart').getContext('2d');
+new Chart(typeCtx, {
+  type: 'doughnut',
+  data: {
+    labels: ['Blog Posts', 'Social Media', 'Email', 'Ad Copy'],
+    datasets: [{
+      data: [60, 40, 25, 17],
+      backgroundColor: ['#0A84FF','#00D4A8','#FFB347','#FF4757'],
+      borderWidth: 0,
+      hoverOffset: 6,
+    }]
+  },
+  options: {
+    responsive: true,
+    cutout: '72%',
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        backgroundColor: '#1E2230',
+        borderColor: '#2A3047',
+        borderWidth: 1,
+        padding: 10,
+      }
+    }
+  }
+});
+
+// ===== LINKEDIN CHART =====
+const liCtx = document.getElementById('linkedinChart').getContext('2d');
+new Chart(liCtx, {
+  type: 'bar',
+  data: {
+    labels: ['W1','W2','W3','W4','W5','W6','W7','W8'],
+    datasets: [
+      {
+        label: 'Likes',
+        data: [142, 310, 189, 450, 280, 620, 389, 861],
+        backgroundColor: 'rgba(10,102,194,0.7)',
+        borderRadius: 4,
+      },
+      {
+        label: 'Comments',
+        data: [38, 72, 44, 120, 65, 180, 95, 233],
+        backgroundColor: 'rgba(0,212,168,0.7)',
+        borderRadius: 4,
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: {
+        display: true,
+        position: 'top',
+        align: 'end',
+        labels: { boxWidth: 10, padding: 16, font: { size: 12 } }
+      },
+      tooltip: {
+        backgroundColor: '#1E2230',
+        borderColor: '#2A3047',
+        borderWidth: 1,
+        padding: 10,
+      }
+    },
+    scales: {
+      x: { grid: { display: false }, stacked: false },
+      y: { grid: { color: 'rgba(42,48,71,0.5)' } }
+    }
+  }
+});
+
+// ===== TREND CHART (Grouped Bar) =====
+const trendCtx = document.getElementById('trendChart').getContext('2d');
+new Chart(trendCtx, {
+  type: 'bar',
+  data: {
+    labels: ['Jan', 'Feb', 'Mar'],
+    datasets: [
+      { label: 'Blog', data: [32, 45, 60], backgroundColor: '#0A84FF', borderRadius: 4 },
+      { label: 'Social', data: [25, 32, 40], backgroundColor: '#00D4A8', borderRadius: 4 },
+      { label: 'Email', data: [14, 20, 25], backgroundColor: '#FFB347', borderRadius: 4 },
+      { label: 'Ad Copy', data: [8, 12, 17], backgroundColor: '#FF4757', borderRadius: 4 },
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: {
+        display: true,
+        position: 'top',
+        align: 'end',
+        labels: { boxWidth: 10, padding: 16, font: { size: 12 } }
+      },
+      tooltip: {
+        backgroundColor: '#1E2230',
+        borderColor: '#2A3047',
+        borderWidth: 1,
+        padding: 10,
+      }
+    },
+    scales: {
+      x: { grid: { display: false } },
+      y: { grid: { color: 'rgba(42,48,71,0.5)' } }
+    }
+  }
+});
+
+// ===== HEATMAP =====
+function buildHeatmap() {
+  const container = document.getElementById('heatmap');
+  const days = 31;
+  const activity = [0,2,1,3,0,0,1,2,3,4,1,2,0,3,1,0,2,3,4,2,1,0,3,2,1,2,3,1,2,1,2];
+  const colors = ['#1E2230','rgba(10,132,255,0.2)','rgba(10,132,255,0.4)','rgba(10,132,255,0.7)','#0A84FF'];
+  for (let i = 0; i < days; i++) {
+    const cell = document.createElement('div');
+    cell.style.cssText = `width:100%;aspect-ratio:1;border-radius:3px;background:${colors[activity[i]]};cursor:pointer;transition:transform .15s;`;
+    cell.title = `Mar ${i+1}: ${activity[i] * 8} content pieces`;
+    cell.onmouseover = () => cell.style.transform = 'scale(1.2)';
+    cell.onmouseout = () => cell.style.transform = 'scale(1)';
+    cell.onclick = () => showToast(`Mar ${i+1}: ${activity[i] * 8} pieces created`);
+    container.appendChild(cell);
+  }
+}
+buildHeatmap();
+
+// ===== UPDATE ON DATE RANGE CHANGE =====
+function updateCharts() {
+  const range = parseInt(document.getElementById('dateRange').value);
+  const multiplier = range === 7 ? 0.25 : range === 30 ? 1 : 3;
+  showToast(`Updated to last ${range} days`);
+}
+</script>
+</body>
+</html>
